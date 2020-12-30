@@ -6,8 +6,8 @@ namespace Moon.TodoList
 {
     public class CommandParser
     {
-        private string _method;
-        private string _parameter;
+        private readonly string _method;
+        private readonly string _parameter;
 
         public CommandParser(string cmd)
         {
@@ -27,7 +27,17 @@ namespace Moon.TodoList
             var type = typeof(Todo);
             var todo = Activator.CreateInstance(type);
             var method = type.GetMethod(_method, BindingFlags.Public | BindingFlags.NonPublic);
-            return method?.Invoke(todo, new object[] {_parameter});
+            if (method == null)
+            {
+                throw new TodoException($"{_method} 命令不识别");
+            }
+
+            return method.Invoke(todo, new object[] {_parameter});
+        }
+
+        public string GetParserMethod()
+        {
+            return _method;
         }
     }
 }
