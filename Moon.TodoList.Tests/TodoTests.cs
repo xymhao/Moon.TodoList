@@ -9,7 +9,7 @@ namespace Moon.TodoList.Tests
         {
             var todo = new Todo();
             var result = todo.Add("abc");
-            Assert.Equal("Item 1 added", result);
+            Assert.NotNull(result);
         }
     }
 }

@@ -22,5 +22,10 @@
         public string Content { get; private set; }
 
         public bool Complete { get; private set; }
+
+        public override string ToString()
+        {
+            return $"{Index} {Content} {Complete}";
+        }
     }
 }

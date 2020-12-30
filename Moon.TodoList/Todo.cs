@@ -21,12 +21,12 @@ namespace Moon.TodoList
             }
         }
 
-        public string Add(string item)
+        public TodoItem Add(string item)
         {
-            var todoItem = new TodoItem(TodoItems.Count, item);
+            var todoItem = new TodoItem(TodoItems.Count +1, item);
             TodoItems.Add(todoItem);
             Save();
-            return $"Item {TodoItems.Count} added";
+            return todoItem;
         }
 
         private void Save()
