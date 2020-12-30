@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moon.TodoList", "Moon.TodoList\Moon.TodoList.csproj", "{356402CD-E242-4C8D-8E67-3B6CA00BC88C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moon.TodoList.Tests", "Moon.TodoList.Tests\Moon.TodoList.Tests.csproj", "{821778A9-49C6-49FA-AC1E-60412E0BB979}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{356402CD-E242-4C8D-8E67-3B6CA00BC88C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356402CD-E242-4C8D-8E67-3B6CA00BC88C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356402CD-E242-4C8D-8E67-3B6CA00BC88C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356402CD-E242-4C8D-8E67-3B6CA00BC88C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{821778A9-49C6-49FA-AC1E-60412E0BB979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{821778A9-49C6-49FA-AC1E-60412E0BB979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821778A9-49C6-49FA-AC1E-60412E0BB979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{821778A9-49C6-49FA-AC1E-60412E0BB979}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
