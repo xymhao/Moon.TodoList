@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Moon.TodoList
 {
@@ -18,14 +19,15 @@ namespace Moon.TodoList
             _filePath = path;
         }
 
-        public void Save(IEnumerable<string> records)
+        public void Save(IEnumerable<TodoItem> records)
         {
-            File.WriteAllLines(_filePath, records);
+            File.WriteAllLines(_filePath, records.Select(x=>x.ToString()));
         }
 
-        public IEnumerable<string> Read()
+        public IEnumerable<TodoItem> Read()
         {
-            return File.ReadAllLines(_filePath);
+            var texts= File.ReadAllLines(_filePath);
+            return texts.Select(text => new TodoItem(text)).ToList();
         }
     }
 }

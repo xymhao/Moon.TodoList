@@ -10,15 +10,11 @@ namespace Moon.TodoList
     {
         public ITodoPersistence Persistence { get; set; }  = new TextPersistence();
 
-        public List<TodoItem> TodoItems { get; set; } = new List<TodoItem>();
+        public List<TodoItem> TodoItems { get; }
 
         public Todo()
         {
-            var records = Persistence.Read();
-            foreach (string record in records)
-            {
-                TodoItems.Add(new TodoItem(record));
-            }
+            TodoItems = Persistence.Read().ToList();
         }
 
         public TodoItem Add(string item)
@@ -31,8 +27,7 @@ namespace Moon.TodoList
 
         private void Save()
         {
-            var records = TodoItems.Select(x => x.ToString());
-            Persistence.Save(records);
+            Persistence.Save(TodoItems);
         }
     }
 }

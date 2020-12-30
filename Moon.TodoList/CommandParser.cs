@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Moon.TodoList
@@ -22,11 +23,18 @@ namespace Moon.TodoList
             _parameter = args[2];
         }
 
+        /// <summary>
+        /// 根据命令执行对应方法
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="TodoException"></exception>
         public object Execute()
         {
             var type = typeof(Todo);
             var todo = Activator.CreateInstance(type);
-            var method = type.GetMethod(_method, BindingFlags.Public | BindingFlags.NonPublic);
+            var methods = type.GetMethods();
+            var method = methods.First(x => 
+                string.Equals(x.Name, _method, StringComparison.CurrentCultureIgnoreCase));
             if (method == null)
             {
                 throw new TodoException($"{_method} 命令不识别");
