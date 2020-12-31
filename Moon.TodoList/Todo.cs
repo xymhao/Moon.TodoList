@@ -9,15 +9,20 @@ namespace Moon.TodoList
 {
     public class Todo
     {
-        public ITodoPersistence Persistence { get; set; }  = new TextPersistence();
+        public ITodoPersistence Persistence { get; }  = new TextPersistence();
 
-        public List<TodoItem> TodoItems { get; }
+        public List<TodoItem> TodoItems { get; } = new List<TodoItem>();
 
         public Todo()
         {
             TodoItems = Persistence.Read().ToList();
         }
 
+        public Todo(string path)
+        {
+            Persistence = new TextPersistence(path);
+        }
+        
         public TodoItem Add(string item)
         {
             var todoItem = new TodoItem(TodoItems.Count +1, item);
@@ -44,6 +49,22 @@ namespace Moon.TodoList
             Save();
             
             return $"Item {index} done.";
+        }
+
+        /// <summary>
+        /// 缺省情况默认返回未完成的
+        /// </summary>
+        /// <param name="type"></param>
+        public IEnumerable<TodoItem> List(string type)
+        {
+            if (string.IsNullOrEmpty(type))
+            {
+                return TodoItems.Where(x=>!x.Complete);
+            }
+            
+            return type == "--all" ? 
+                TodoItems
+                : throw  new TodoException($"{type} 为无法识别的命令");
         }
     }
 }
