@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mime;
 
 namespace Moon.TodoList
 {
@@ -28,6 +29,21 @@ namespace Moon.TodoList
         private void Save()
         {
             Persistence.Save(TodoItems);
+        }
+
+        public string Done(int index)
+        {
+            var targetItem = TodoItems.Find(x => x.Index == index);
+            if (targetItem == null)
+            {
+                throw  new TodoException("index 不存在");
+            }
+
+            targetItem.Done();
+
+            Save();
+            
+            return $"Item {index} done.";
         }
     }
 }

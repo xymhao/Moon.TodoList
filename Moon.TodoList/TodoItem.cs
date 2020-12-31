@@ -36,5 +36,10 @@
         {
             return $"{Index} {Content} {Complete}";
         }
+
+        public void Done()
+        {
+            Complete = true;
+        }
     }
 }
