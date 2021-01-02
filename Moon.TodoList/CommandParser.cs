@@ -20,7 +20,20 @@ namespace Moon.TodoList
             }
 
             _method = args[1];
-            _parameter = args[2];
+            if (args.Length > 2)
+            {
+                var parameters = string.Empty;
+                for (int i = 2; i < args.Length; i++)
+                {
+                    parameters += args[i] + " ";
+                }
+
+                _parameter = parameters;
+            }
+            else
+            {
+                _parameter = null;
+            }
         }
 
         /// <summary>
@@ -33,7 +46,7 @@ namespace Moon.TodoList
             var type = typeof(Todo);
             var todo = Activator.CreateInstance(type);
             var methods = type.GetMethods();
-            var method = methods.First(x => 
+            var method = methods.First(x =>
                 string.Equals(x.Name, _method, StringComparison.CurrentCultureIgnoreCase));
             if (method == null)
             {

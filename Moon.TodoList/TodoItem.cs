@@ -1,10 +1,14 @@
-﻿namespace Moon.TodoList
+﻿using System;
+
+namespace Moon.TodoList
 {
     public class TodoItem
     {
+        private const string Symbol = "^s";
+
         public TodoItem(string record)
         {
-            var args = record.Trim().Split(' ');
+            var args = record.Trim().Split(new string[] {Symbol}, StringSplitOptions.None);
             Index = int.Parse(args[0]);
             Content = args[1];
             Complete = bool.Parse(args[2]);
@@ -35,6 +39,11 @@
         public override string ToString()
         {
             return $"{Index} {Content} {Complete}";
+        }
+
+        public string ToSaveString()
+        {
+            return $"{Index}{Symbol}{Content}{Symbol}{Complete}";
         }
 
         public void Done()

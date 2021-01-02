@@ -23,12 +23,13 @@ namespace Moon.TodoList
             Persistence = new TextPersistence(path);
         }
         
-        public TodoItem Add(string item)
+        public string Add(string item)
         {
             var todoItem = new TodoItem(TodoItems.Count +1, item);
             TodoItems.Add(todoItem);
             Save();
-            return todoItem;
+            Show(TodoItems);
+            return $"Item {todoItem.Index} added";
         }
 
         private void Save()
@@ -52,19 +53,31 @@ namespace Moon.TodoList
         }
 
         /// <summary>
+        /// 获取todolist列表
         /// 缺省情况默认返回未完成的
         /// </summary>
         /// <param name="type"></param>
-        public IEnumerable<TodoItem> List(string type)
+        public string List(string type)
         {
+            var unCompleteItems = TodoItems.Where(x=>!x.Complete).ToList();
+
             if (string.IsNullOrEmpty(type))
             {
-                return TodoItems.Where(x=>!x.Complete);
+                Show(unCompleteItems);
+                return $"Total: {unCompleteItems.Count()} items";
             }
             
             return type == "--all" ? 
-                TodoItems
+                $"Total: {TodoItems.Count} items, {TodoItems.Count -unCompleteItems.Count()} item done"
                 : throw  new TodoException($"{type} 为无法识别的命令");
+        }
+
+        private void Show(IEnumerable<TodoItem> list)
+        {
+            foreach (TodoItem todoItem in list)
+            {
+                Console.WriteLine($"{todoItem.Index}. {todoItem.Content} ");
+            }
         }
     }
 }

@@ -6,7 +6,16 @@ namespace Moon.TodoList
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Welcome to moon TodoList");
+            var cmd = Console.ReadLine();
+
+            while (cmd != "exit")
+            {
+                var parser = new CommandParser(cmd);
+                var output =parser.Execute();
+                Console.WriteLine(output.ToString());
+                cmd = Console.ReadLine();
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Moon.TodoList.Tests
         public void Should_Success_When_Add_Item_Abc()
         {
             var result = Todo.Add("abc");
-            Assert.NotNull(result);
+            Assert.Equal("Item 1 added", result);
         }
 
         [Fact]
@@ -44,16 +44,17 @@ namespace Moon.TodoList.Tests
             Todo.Add("bcd");
             Todo.Done(1);
             var result = Todo.List(null);
-            Assert.Single(result);
+            Assert.Equal("Total: 1 items",result);
         }
-        
+
         [Fact]
         public void Should_All_List_When_Parameter_All()
         {
             Todo.Add("bcd");
             Todo.Add("bcd");
+            Todo.Done(1);
             var result = Todo.List("--all");
-            Assert.Equal(2,result.Count());
+            Assert.Equal("Total: 2 items, 1 item done", result);
         }
 
         [Fact]

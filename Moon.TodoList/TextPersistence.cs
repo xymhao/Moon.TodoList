@@ -9,19 +9,28 @@ namespace Moon.TodoList
     {
         private readonly string _filePath;
 
-        public TextPersistence()
+        public TextPersistence():this(Environment.CurrentDirectory + @"\" + "MoonTodoList.txt")
         {
-            _filePath = Environment.CurrentDirectory + @"\" + "MoonTodoList.txt";
         }
 
         public TextPersistence(string path)
         {
             _filePath = path;
+            InitTextFile();
+        }
+
+        private void InitTextFile()
+        {
+            if (!File.Exists(_filePath))
+            {
+                var file = File.Create(_filePath);
+                file.Close();
+            }
         }
 
         public void Save(IEnumerable<TodoItem> records)
         {
-            File.WriteAllLines(_filePath, records.Select(x=>x.ToString()));
+            File.WriteAllLines(_filePath, records.Select(x=>x.ToSaveString()));
         }
 
         public IEnumerable<TodoItem> Read()
