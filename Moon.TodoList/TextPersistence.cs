@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Moon.TodoList
 {
@@ -30,13 +31,13 @@ namespace Moon.TodoList
 
         public void Save(IEnumerable<TodoItem> records)
         {
-            File.WriteAllLines(_filePath, records.Select(x=>x.ToSaveString()));
+            File.WriteAllText(_filePath, JsonConvert.SerializeObject(records));
         }
 
         public IEnumerable<TodoItem> Read()
         {
-            var texts= File.ReadAllLines(_filePath);
-            return texts.Select(text => new TodoItem(text)).ToList();
+            var texts= File.ReadAllText(_filePath);
+            return  JsonConvert.DeserializeObject<List<TodoItem>>(texts);
         }
     }
 }

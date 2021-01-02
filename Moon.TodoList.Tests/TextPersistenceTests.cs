@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Xunit;
 
 namespace Moon.TodoList.Tests
@@ -19,8 +20,8 @@ namespace Moon.TodoList.Tests
                 new TodoItem(3, "c")
             });
 
-            var lines = File.ReadAllLines(filePath);
-            Assert.Equal(3, lines.Length);
+            var lines = persistence.Read();
+            Assert.Equal(3, lines.Count());
         }
     }
 }

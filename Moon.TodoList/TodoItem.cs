@@ -6,12 +6,9 @@ namespace Moon.TodoList
     {
         private const string Symbol = "^s";
 
-        public TodoItem(string record)
+        public TodoItem()
         {
-            var args = record.Trim().Split(new string[] {Symbol}, StringSplitOptions.None);
-            Index = int.Parse(args[0]);
-            Content = args[1];
-            Complete = bool.Parse(args[2]);
+            
         }
 
         public TodoItem(int index, string content)
@@ -39,11 +36,6 @@ namespace Moon.TodoList
         public override string ToString()
         {
             return $"{Index} {Content} {Complete}";
-        }
-
-        public string ToSaveString()
-        {
-            return $"{Index}{Symbol}{Content}{Symbol}{Complete}";
         }
 
         public void Done()
